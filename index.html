@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sikshak Seva | शिक्षक सेवा पोर्टल</title>
+<title>Sikshak Seva | शिक्षकों की सभी सेवाएं एक जगह</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
 *{
@@ -13,221 +15,246 @@
   padding:0;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
   font-family:Arial,"Noto Sans Devanagari",sans-serif;
-  background:#f4f7fb;
-  color:#1f2937;
+  background:#f5f8fc;
+  color:#172033;
 }
 
+/* HEADER */
 header{
-  background:linear-gradient(135deg,#075985,#0284c7);
+  background:linear-gradient(135deg,#0759a5,#0878d1);
   color:white;
-  padding:15px 5%;
   position:sticky;
   top:0;
   z-index:1000;
-  box-shadow:0 3px 12px #0002;
+  box-shadow:0 3px 12px rgba(0,0,0,.15);
 }
 
-.navbar{
-  max-width:1200px;
+.nav{
+  max-width:1150px;
   margin:auto;
+  padding:14px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px;
 }
 
 .logo{
-  font-size:24px;
+  font-size:23px;
   font-weight:bold;
 }
 
-.logo small{
-  display:block;
-  font-size:11px;
-  font-weight:normal;
-  opacity:.9;
+.logo span{
+  color:#ffb000;
 }
 
-nav{
+.menu{
   display:flex;
-  gap:18px;
+  gap:8px;
 }
 
-nav a{
+.menu a{
   color:white;
   text-decoration:none;
+  padding:9px 13px;
+  border-radius:8px;
   font-size:14px;
-  font-weight:bold;
 }
 
-nav a:hover{
-  color:#fde68a;
+.menu a:hover{
+  background:rgba(255,255,255,.15);
 }
 
+/* HERO */
 .hero{
-  background:linear-gradient(135deg,#e0f2fe,#fff7ed);
+  background:linear-gradient(135deg,#0864b5,#0a8bd8);
+  color:white;
   text-align:center;
-  padding:45px 18px;
+  padding:48px 18px 55px;
 }
 
 .hero h1{
-  color:#075985;
-  font-size:clamp(25px,5vw,40px);
-  margin-bottom:12px;
+  font-size:34px;
+  margin-bottom:10px;
 }
 
 .hero p{
-  color:#475569;
-  margin-bottom:22px;
+  font-size:17px;
+  opacity:.95;
+  margin-bottom:25px;
 }
 
-.search-box{
-  max-width:600px;
+.search{
+  max-width:650px;
   margin:auto;
-  display:flex;
-  background:white;
-  border-radius:30px;
-  padding:5px;
-  box-shadow:0 4px 15px #0001;
 }
 
-.search-box input{
+.search input{
   width:100%;
+  padding:15px 20px;
   border:0;
-  outline:0;
-  padding:13px 18px;
+  outline:none;
   border-radius:30px;
-  font-size:15px;
+  font-size:16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.15);
 }
 
-.search-box button{
-  border:0;
-  background:#0284c7;
-  color:white;
-  padding:0 22px;
-  border-radius:25px;
-  cursor:pointer;
-}
-
+/* CONTAINER */
 .container{
-  max-width:1200px;
-  margin:35px auto;
-  padding:0 15px;
+  max-width:1150px;
+  margin:auto;
+  padding:35px 18px;
 }
 
 .section-title{
   text-align:center;
-  color:#075985;
-  font-size:27px;
   margin-bottom:25px;
 }
 
-.services{
+.section-title h2{
+  font-size:26px;
+  color:#0759a5;
+  margin-bottom:7px;
+}
+
+.section-title p{
+  color:#667085;
+}
+
+/* SERVICE CARDS */
+.grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(3,1fr);
   gap:18px;
 }
 
 .card{
   background:white;
-  padding:22px;
   border-radius:15px;
-  box-shadow:0 4px 15px #0000000d;
-  border:1px solid #e2e8f0;
-  transition:.2s;
+  padding:21px;
+  box-shadow:0 4px 15px rgba(20,50,90,.08);
+  border:1px solid #e7edf5;
+  transition:.25s;
 }
 
 .card:hover{
   transform:translateY(-4px);
-  box-shadow:0 7px 20px #0002;
+  box-shadow:0 8px 25px rgba(20,50,90,.14);
 }
 
-.card .icon{
-  font-size:35px;
-  margin-bottom:12px;
+.icon{
+  width:48px;
+  height:48px;
+  border-radius:12px;
+  background:#e8f3ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  margin-bottom:13px;
 }
 
 .card h3{
-  color:#075985;
-  margin-bottom:8px;
-  font-size:18px;
+  color:#17365d;
+  margin-bottom:7px;
+  font-size:19px;
 }
 
 .card p{
-  font-size:13px;
-  color:#64748b;
-  min-height:40px;
+  color:#667085;
+  font-size:14px;
+  line-height:1.5;
   margin-bottom:15px;
 }
 
-.card a{
+.btn{
   display:inline-block;
-  background:#0284c7;
+  border:0;
+  background:#0878d1;
   color:white;
+  padding:10px 15px;
+  border-radius:8px;
   text-decoration:none;
-  padding:9px 14px;
-  border-radius:7px;
-  font-size:13px;
+  cursor:pointer;
+  font-size:14px;
 }
 
-.card a:hover{
-  background:#0369a1;
+.btn:hover{
+  background:#075fa8;
 }
 
+.orange{
+  background:#f59e0b;
+}
+
+.orange:hover{
+  background:#d98600;
+}
+
+.reset{
+  background:#667085;
+}
+
+.reset:hover{
+  background:#4b5565;
+}
+
+/* FORMS */
 .forms-section{
-  margin-top:50px;
-  background:white;
-  padding:25px;
-  border-radius:18px;
-  box-shadow:0 4px 18px #0001;
-  scroll-margin-top:90px;
+  margin-top:15px;
 }
 
-.form-buttons{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
-  gap:10px;
+.forms-box{
+  background:white;
+  border-radius:18px;
+  padding:25px;
+  border:1px solid #e5eaf1;
+  box-shadow:0 5px 20px rgba(20,50,90,.08);
+}
+
+.form-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
   margin-bottom:25px;
 }
 
-.form-buttons button{
-  border:1px solid #bae6fd;
-  background:#f0f9ff;
-  color:#075985;
-  padding:12px 8px;
-  border-radius:8px;
+.form-tab{
+  border:1px solid #cdd8e5;
+  background:#f7faff;
+  color:#164d7d;
+  padding:10px 13px;
+  border-radius:9px;
   cursor:pointer;
-  font-weight:bold;
+  font-size:14px;
 }
 
-.form-buttons button.active,
-.form-buttons button:hover{
-  background:#0284c7;
+.form-tab:hover{
+  border-color:#0878d1;
+}
+
+.form-tab.active{
+  background:#0878d1;
   color:white;
+  border-color:#0878d1;
 }
 
-.form-area{
+.form-layout{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:25px;
 }
 
-.form-box{
+.form-area{
   background:#f8fafc;
-  border:1px solid #e2e8f0;
   padding:20px;
-  border-radius:12px;
+  border-radius:13px;
 }
 
-.form-box h3{
-  color:#075985;
-  margin-bottom:18px;
+.form-area h3{
+  color:#0759a5;
+  margin-bottom:17px;
 }
 
 .field{
@@ -236,159 +263,166 @@ nav a:hover{
 
 .field label{
   display:block;
-  font-size:13px;
+  font-size:14px;
   font-weight:bold;
-  margin-bottom:5px;
+  margin-bottom:6px;
+  color:#344054;
 }
 
 .field input,
 .field select,
 .field textarea{
   width:100%;
-  padding:10px;
-  border:1px solid #cbd5e1;
-  border-radius:7px;
+  padding:11px 12px;
+  border:1px solid #ccd5e0;
+  border-radius:8px;
   outline:none;
-  font-size:14px;
   background:white;
+  font-size:14px;
 }
 
 .field textarea{
-  min-height:80px;
+  min-height:75px;
   resize:vertical;
 }
 
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color:#0878d1;
+  box-shadow:0 0 0 3px rgba(8,120,209,.1);
 }
 
-.action-buttons{
+.form-actions{
   display:flex;
   gap:10px;
-  flex-wrap:wrap;
   margin-top:15px;
+  flex-wrap:wrap;
 }
 
-.action-buttons button{
-  border:0;
-  padding:12px 18px;
-  border-radius:7px;
-  cursor:pointer;
-  font-weight:bold;
+/* PAPER */
+.paper-wrap{
+  background:#eef2f6;
+  padding:18px;
+  border-radius:13px;
 }
 
-.preview-btn{
-  background:#0284c7;
-  color:white;
-}
-
-.pdf-btn{
-  background:#16a34a;
-  color:white;
-}
-
-.reset-btn{
-  background:#dc2626;
-  color:white;
-}
-
-.preview-box{
-  background:#e2e8f0;
-  padding:15px;
-  border-radius:12px;
-  overflow:auto;
-}
-
-#paper{
+.paper{
   background:white;
-  color:#111827;
-  width:100%;
-  min-height:550px;
-  padding:35px;
-  line-height:1.8;
-  font-size:15px;
+  min-height:650px;
+  padding:40px;
+  color:#111;
+  font-family:"Times New Roman","Noto Serif Devanagari",serif;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-#paper h2{
+.paper-header{
   text-align:center;
-  text-decoration:underline;
   margin-bottom:25px;
+}
+
+.paper-header h2{
   font-size:21px;
+  margin-bottom:7px;
 }
 
-#paper .date{
-  text-align:right;
-  margin-bottom:25px;
+.paper-header h3{
+  font-size:18px;
+  margin-bottom:15px;
 }
 
-#paper .subject{
+.paper p{
+  font-size:16px;
+  line-height:1.8;
+  margin-bottom:10px;
+}
+
+.subject{
+  text-align:center;
   font-weight:bold;
-  margin:18px 0;
+  text-decoration:underline;
+  margin:20px 0;
 }
 
-#paper .signature{
-  margin-top:45px;
+.signature{
+  margin-top:55px;
   text-align:right;
+  line-height:1.7;
 }
 
+.note{
+  background:#fff8e7;
+  border-left:4px solid #f59e0b;
+  padding:12px;
+  margin-top:20px;
+  border-radius:5px;
+  font-size:13px;
+  color:#664d03;
+}
+
+.no-result{
+  display:none;
+  text-align:center;
+  padding:25px;
+  color:#667085;
+}
+
+/* FOOTER */
 footer{
-  margin-top:45px;
-  background:#075985;
-  color:white;
+  background:#102a43;
+  color:#d9e2ec;
   text-align:center;
   padding:25px 15px;
-  font-size:13px;
+  margin-top:20px;
 }
 
-.notice{
-  background:#fff7ed;
-  color:#9a3412;
-  padding:12px;
-  border-radius:8px;
-  font-size:13px;
-  margin-bottom:20px;
+footer p{
+  margin:5px;
+  font-size:14px;
 }
 
-.hidden{
-  display:none!important;
-}
-
-@media(max-width:800px){
-  nav{
-    gap:10px;
+/* MOBILE */
+@media(max-width:850px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
   }
-
-  nav a{
-    font-size:12px;
+  .form-layout{
+    grid-template-columns:1fr;
   }
+  .menu a{
+    display:none;
+  }
+}
 
+@media(max-width:600px){
+  .hero{
+    padding:35px 15px 42px;
+  }
+  .hero h1{
+    font-size:27px;
+  }
+  .hero p{
+    font-size:15px;
+  }
+  .grid{
+    grid-template-columns:1fr;
+  }
+  .container{
+    padding:28px 13px;
+  }
+  .forms-box{
+    padding:14px;
+  }
   .form-area{
-    grid-template-columns:1fr;
-  }
-
-  #paper{
-    padding:22px;
-  }
-}
-
-@media(max-width:500px){
-  .navbar{
-    flex-direction:column;
-  }
-
-  nav{
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-
-  .row{
-    grid-template-columns:1fr;
-  }
-
-  .forms-section{
     padding:15px;
+  }
+  .paper{
+    padding:24px 18px;
+    min-height:600px;
+  }
+  .paper p{
+    font-size:14px;
+    line-height:1.7;
   }
 }
 </style>
@@ -396,578 +430,529 @@ footer{
 
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="navbar">
-    <div class="logo">
-      📘 Sikshak Seva
-      <small>शिक्षकों की सभी महत्वपूर्ण सेवाएं एक जगह</small>
-    </div>
-
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#services">Services</a>
-      <a href="#forms">Forms & Documents</a>
-    </nav>
-  </div>
+<div class="nav">
+<div class="logo">
+📚 Sikshak <span>Seva</span>
+</div>
+<div class="menu">
+<a href="#services">Services</a>
+<a href="#forms">Forms & Documents</a>
+</div>
+</div>
 </header>
 
-<section class="hero" id="home">
-  <h1>शिक्षकों की सभी महत्वपूर्ण सेवाएं एक जगह</h1>
-  <p>सरकारी शिक्षा वेबसाइट, शिक्षक सेवाएं और आवेदन पत्र</p>
-
-  <div class="search-box">
-    <input type="text" id="searchInput"
-           placeholder="सेवा या वेबसाइट खोजें..."
-           onkeyup="searchServices()">
-    <button onclick="searchServices()">खोजें</button>
-  </div>
+<!-- HERO -->
+<section class="hero">
+<h1>शिक्षकों की सभी महत्वपूर्ण सेवाएं एक जगह</h1>
+<p>Official Education Portals • Bihar Teacher Services • Forms & Documents</p>
+<div class="search">
+<input
+type="text"
+id="searchInput"
+placeholder="🔍 सेवा खोजें... जैसे DIKSHA, NCERT, छुट्टी..."
+oninput="searchServices()"
+>
+</div>
 </section>
 
-<section class="container" id="services">
-  <h2 class="section-title">🔗 महत्वपूर्ण सरकारी सेवाएं</h2>
+<main class="container">
 
-  <div class="services" id="serviceList">
+<!-- SERVICES -->
+<section id="services">
+<div class="section-title">
+<h2>🌐 महत्वपूर्ण शिक्षक सेवाएं</h2>
+<p>Official websites और teacher resources</p>
+</div>
 
-    <div class="card">
-      <div class="icon">📚</div>
-      <h3>DIKSHA</h3>
-      <p>शिक्षकों के लिए डिजिटल प्रशिक्षण और शिक्षण सामग्री।</p>
-      <a href="https://diksha.gov.in/" target="_blank">Open Website ↗</a>
-    </div>
+<div class="grid" id="serviceGrid">
 
-    <div class="card">
-      <div class="icon">🎓</div>
-      <h3>ePathshala</h3>
-      <p>NCERT की किताबें और डिजिटल अध्ययन सामग्री।</p>
-      <a href="https://www.epathshala.nic.in/" target="_blank">Open Website ↗</a>
-    </div>
+<div class="card service-card" data-title="diksha teacher training">
+<div class="icon">📖</div>
+<h3>DIKSHA</h3>
+<p>Teacher training, courses और digital learning resources.</p>
+<a class="btn" href="https://diksha.gov.in/" target="_blank">Open Website ↗</a>
+</div>
 
-    <div class="card">
-      <div class="icon">📖</div>
-      <h3>NCERT</h3>
-      <p>पाठ्यक्रम, पुस्तकें और शैक्षणिक संसाधन।</p>
-      <a href="https://www.ncert.nic.in/" target="_blank">Open Website ↗</a>
-    </div>
+<div class="card service-card" data-title="diksha teacher training courses">
+<div class="icon">🎓</div>
+<h3>DIKSHA Teacher</h3>
+<p>Teachers के लिए training और learning resources.</p>
+<a class="btn" href="https://diksha.gov.in/exploreasteacher/" target="_blank">Open ↗</a>
+</div>
 
-    <div class="card">
-      <div class="icon">🏫</div>
-      <h3>CBSE</h3>
-      <p>CBSE की आधिकारिक वेबसाइट और सूचनाएं।</p>
-      <a href="https://www.cbse.gov.in/" target="_blank">Open Website ↗</a>
-    </div>
+<div class="card service-card" data-title="epathshala ncert books">
+<div class="icon">📚</div>
+<h3>ePathshala</h3>
+<p>NCERT books और digital educational resources.</p>
+<a class="btn" href="https://www.epathshala.nic.in/" target="_blank">Open Website ↗</a>
+</div>
 
-    <div class="card">
-      <div class="icon">📊</div>
-      <h3>UDISE+</h3>
-      <p>विद्यालय और शिक्षा संबंधी ऑनलाइन सेवाएं।</p>
-      <a href="https://www.education.gov.in/udise-plus" target="_blank">Open Website ↗</a>
-    </div>
+<div class="card service-card" data-title="ncert official website">
+<div class="icon">🏫</div>
+<h3>NCERT</h3>
+<p>NCERT की official website.</p>
+<a class="btn" href="https://www.ncert.nic.in/" target="_blank">Open Website ↗</a>
+</div>
 
-    <div class="card">
-      <div class="icon">🏛️</div>
-      <h3>शिक्षा मंत्रालय</h3>
-      <p>भारत सरकार के शिक्षा संबंधी आधिकारिक अपडेट।</p>
-      <a href="https://www.education.gov.in/" target="_blank">Open Website ↗</a>
-    </div>
+<div class="card service-card" data-title="ncert textbooks class 1 to 12">
+<div class="icon">📘</div>
+<h3>NCERT Textbooks</h3>
+<p>Class 1 से 12 तक की official textbooks.</p>
+<a class="btn" href="https://ncert.nic.in/textbook.php" target="_blank">Books देखें ↗</a>
+</div>
 
-    <div class="card">
-      <div class="icon">📋</div>
-      <h3>SCERT Bihar</h3>
-      <p>बिहार की शैक्षणिक सामग्री और प्रशिक्षण।</p>
-      <a href="https://scert.bihar.gov.in/" target="_blank">Open Website ↗</a>
-    </div>
+<div class="card service-card" data-title="cbse official website">
+<div class="icon">🏛️</div>
+<h3>CBSE</h3>
+<p>CBSE की official website और academic information.</p>
+<a class="btn" href="https://www.cbse.gov.in/" target="_blank">Open Website ↗</a>
+</div>
 
-    <div class="card">
-      <div class="icon">🧑‍🏫</div>
-      <h3>e-Shikshakosh Bihar</h3>
-      <p>बिहार शिक्षकों के लिए ऑनलाइन सेवाएं।</p>
-      <a href="https://eshikshakosh.bihar.gov.in/" target="_blank">Open Website ↗</a>
-    </div>
+<div class="card service-card" data-title="udise plus school education data">
+<div class="icon">📊</div>
+<h3>UDISE+</h3>
+<p>School education data और UDISE+ services.</p>
+<a class="btn" href="https://www.education.gov.in/udise-plus" target="_blank">Open ↗</a>
+</div>
 
-    <div class="card">
-      <div class="icon">📘</div>
-      <h3>e-LOTS Bihar</h3>
-      <p>बिहार की डिजिटल पाठ्यपुस्तक और सामग्री।</p>
-      <a href="https://bepclots.bihar.gov.in/" target="_blank">Open Website ↗</a>
-    </div>
+<div class="card service-card" data-title="ministry of education india">
+<div class="icon">🇮🇳</div>
+<h3>Ministry of Education</h3>
+<p>भारत सरकार के शिक्षा मंत्रालय की official information.</p>
+<a class="btn" href="https://www.education.gov.in/ministry-education" target="_blank">Open ↗</a>
+</div>
 
-    <div class="card">
-      <div class="icon">🍲</div>
-      <h3>PM POSHAN</h3>
-      <p>विद्यालय पोषण योजना से संबंधित जानकारी।</p>
-      <a href="https://pmposhan.education.gov.in/firstpage.html" target="_blank">Open Website ↗</a>
-    </div>
+<div class="card service-card" data-title="parakh national assessment centre">
+<div class="icon">📝</div>
+<h3>PARAKH</h3>
+<p>National assessment centre और assessment resources.</p>
+<a class="btn" href="https://parakh.ncert.gov.in/" target="_blank">Open ↗</a>
+</div>
 
-  </div>
+<div class="card service-card" data-title="pm poshan mid day meal scheme">
+<div class="icon">🍲</div>
+<h3>PM POSHAN</h3>
+<p>School meal programme से संबंधित official portal.</p>
+<a class="btn" href="https://pmposhan.education.gov.in/firstpage.html" target="_blank">Open ↗</a>
+</div>
+
+<div class="card service-card" data-title="scert bihar">
+<div class="icon">🏫</div>
+<h3>SCERT Bihar</h3>
+<p>बिहार राज्य शैक्षिक अनुसंधान एवं प्रशिक्षण परिषद.</p>
+<a class="btn" href="https://scert.bihar.gov.in/" target="_blank">Open ↗</a>
+</div>
+
+<div class="card service-card" data-title="e shikshakosh bihar teacher services">
+<div class="icon">💻</div>
+<h3>e-Shikshakosh Bihar</h3>
+<p>बिहार शिक्षा विभाग से संबंधित teacher services.</p>
+<a class="btn" href="https://eshikshakosh.bihar.gov.in/" target="_blank">Open ↗</a>
+</div>
+
+<div class="card service-card" data-title="e lots bihar learning teaching resources">
+<div class="icon">📗</div>
+<h3>e-LOTS Bihar</h3>
+<p>बिहार के learning और teaching resources.</p>
+<a class="btn" href="https://bepclots.bihar.gov.in/" target="_blank">Open ↗</a>
+</div>
+
+<div class="card service-card" data-title="bihar teacher deployment bpsc">
+<div class="icon">👨‍🏫</div>
+<h3>Bihar Teacher Deployment</h3>
+<p>Teacher deployment से संबंधित portal.</p>
+<a class="btn" href="https://edu-bpsc.bihar.gov.in/" target="_blank">Open ↗</a>
+</div>
+
+</div>
+
+<div class="no-result" id="noResult">
+कोई सेवा नहीं मिली।
+</div>
 </section>
 
-<section class="container forms-section" id="forms">
+<!-- FORMS -->
+<section id="forms" class="forms-section">
+<div class="section-title" style="margin-top:45px;">
+<h2>📄 Forms & Documents</h2>
+<p>जरूरी application कुछ जानकारी भरकर तैयार करें और PDF डाउनलोड करें</p>
+</div>
 
-  <h2 class="section-title">📄 Teacher Forms & Documents</h2>
+<div class="forms-box">
+<!-- FORM BUTTONS -->
+<div class="form-tabs">
+<button class="form-tab active" onclick="selectForm('casual',this)">📝 Casual Leave</button>
+<button class="form-tab" onclick="selectForm('medical',this)">🏥 Medical Leave</button>
+<button class="form-tab" onclick="selectForm('other',this)">📄 Other Leave</button>
+<button class="form-tab" onclick="selectForm('special',this)">⭐ Special Leave</button>
+<button class="form-tab" onclick="selectForm('transfer',this)">🔄 Transfer</button>
+<button class="form-tab" onclick="selectForm('noc',this)">📑 NOC</button>
+<button class="form-tab" onclick="selectForm('joining',this)">📌 Joining</button>
+<button class="form-tab" onclick="selectForm('relieving',this)">🚪 Relieving</button>
+<button class="form-tab" onclick="selectForm('service',this)">📕 Service Book</button>
+</div>
 
-  <div class="notice">
-    अपना आवेदन चुनें, जानकारी भरें और आवेदन का Preview देखकर PDF डाउनलोड करें।
-    यह सामान्य प्रारूप है। अंतिम उपयोग से पहले अपने विभागीय नियमों से मिलान करें।
-  </div>
+<div class="form-layout">
+<!-- INPUT -->
+<div class="form-area">
+<h3 id="formTitle">Casual Leave Application</h3>
 
-  <div class="form-buttons">
-    <button class="active" onclick="selectForm('casual',this)">📝 Casual Leave</button>
-    <button onclick="selectForm('medical',this)">🏥 Medical Leave</button>
-    <button onclick="selectForm('other',this)">📄 Other Leave</button>
-    <button onclick="selectForm('special',this)">⭐ Special Leave</button>
-    <button onclick="selectForm('transfer',this)">🔄 Transfer</button>
-    <button onclick="selectForm('noc',this)">📜 NOC</button>
-    <button onclick="selectForm('joining',this)">🏫 Joining</button>
-    <button onclick="selectForm('relieving',this)">📤 Relieving</button>
-    <button onclick="selectForm('service',this)">📚 Service Book</button>
-  </div>
+<div class="field">
+<label>नाम *</label>
+<input id="name" placeholder="अपना पूरा नाम">
+</div>
 
-  <div class="form-area">
+<div class="field">
+<label>पद *</label>
+<input id="designation" placeholder="जैसे: शिक्षक">
+</div>
 
-    <div class="form-box">
-      <h3 id="formHeading">📝 Casual Leave Application</h3>
+<div class="field">
+<label>विद्यालय का नाम *</label>
+<input id="school" placeholder="विद्यालय का नाम">
+</div>
 
-      <div class="field">
-        <label>आवेदक का नाम *</label>
-        <input id="name" placeholder="अपना पूरा नाम">
-      </div>
+<div class="field">
+<label>जिला *</label>
+<input id="district" placeholder="जिला">
+</div>
 
-      <div class="field">
-        <label>पद / Designation</label>
-        <input id="designation" placeholder="जैसे: शिक्षक">
-      </div>
+<div class="field">
+<label>प्रधानाध्यापक / सक्षम पदाधिकारी</label>
+<input id="head" placeholder="प्रधानाध्यापक का नाम">
+</div>
 
-      <div class="field">
-        <label>विद्यालय का नाम *</label>
-        <input id="school" placeholder="विद्यालय का नाम">
-      </div>
+<div class="field">
+<label>आवेदन दिनांक *</label>
+<input type="date" id="applicationDate">
+</div>
 
-      <div class="field">
-        <label>जिला</label>
-        <input id="district" placeholder="जिला">
-      </div>
+<!-- LEAVE -->
+<div id="leaveFields">
+<div class="field">
+<label>छुट्टी शुरू होने की तारीख *</label>
+<input type="date" id="fromDate">
+</div>
+<div class="field">
+<label>छुट्टी समाप्त होने की तारीख *</label>
+<input type="date" id="toDate">
+</div>
+<div class="field">
+<label>छुट्टी के दिनों की संख्या</label>
+<input type="number" id="days" placeholder="जैसे: 2">
+</div>
+<div class="field">
+<label>कारण</label>
+<textarea id="leaveReason" placeholder="छुट्टी लेने का कारण"></textarea>
+</div>
+</div>
 
-      <div class="field">
-        <label>प्राधिकारी / प्रधानाध्यापक का नाम</label>
-        <input id="head" placeholder="प्रधानाध्यापक / संबंधित अधिकारी">
-      </div>
+<!-- TRANSFER -->
+<div id="transferFields" style="display:none">
+<div class="field">
+<label>वर्तमान विद्यालय</label>
+<input id="currentSchool" placeholder="वर्तमान विद्यालय">
+</div>
+<div class="field">
+<label>स्थानांतरण का कारण</label>
+<textarea id="transferReason" placeholder="स्थानांतरण का कारण"></textarea>
+</div>
+</div>
 
-      <div class="field">
-        <label>आवेदन दिनांक</label>
-        <input id="applicationDate" type="date">
-      </div>
+<!-- NOC -->
+<div id="nocFields" style="display:none">
+<div class="field">
+<label>NOC किस उद्देश्य के लिए</label>
+<textarea id="nocPurpose" placeholder="उद्देश्य लिखें"></textarea>
+</div>
+</div>
 
-      <div id="leaveFields">
+<!-- JOINING -->
+<div id="joiningFields" style="display:none">
+<div class="field">
+<label>Joining Date</label>
+<input type="date" id="joiningDate">
+</div>
+<div class="field">
+<label>Order Number</label>
+<input id="orderNo" placeholder="आदेश संख्या">
+</div>
+</div>
 
-        <div class="row">
-          <div class="field">
-            <label>छुट्टी प्रारंभ दिनांक</label>
-            <input id="fromDate" type="date">
-          </div>
+<!-- RELIEVING -->
+<div id="relievingFields" style="display:none">
+<div class="field">
+<label>Relieving Date</label>
+<input type="date" id="relievingDate">
+</div>
+<div class="field">
+<label>Relieving Reason</label>
+<textarea id="relievingReason" placeholder="कारण"></textarea>
+</div>
+</div>
 
-          <div class="field">
-            <label>छुट्टी समाप्ति दिनांक</label>
-            <input id="toDate" type="date">
-          </div>
-        </div>
+<!-- SERVICE BOOK -->
+<div id="serviceFields" style="display:none">
+<div class="field">
+<label>Service Book से संबंधित अनुरोध</label>
+<textarea id="serviceRequest" placeholder="अपना अनुरोध लिखें"></textarea>
+</div>
+</div>
 
-        <div class="field">
-          <label>कुल दिनों की संख्या</label>
-          <input id="days" type="number" min="1" placeholder="कुल दिन">
-        </div>
+<div class="field">
+<label>स्थान</label>
+<input id="place" placeholder="स्थान">
+</div>
 
-        <div class="field">
-          <label>छुट्टी का कारण</label>
-          <textarea id="leaveReason" placeholder="छुट्टी लेने का कारण"></textarea>
-        </div>
+<div class="form-actions">
+<button class="btn" onclick="generatePreview()">👁️ Preview</button>
+<button class="btn orange" onclick="downloadPDF()">📥 Download PDF</button>
+<button class="btn reset" onclick="resetForm()">🔄 Reset</button>
+</div>
 
-      </div>
+<div class="note">
+⚠️ यह application generator सुविधा के लिए है। अंतिम आवेदन जमा करने से पहले अपने विभाग/विद्यालय के निर्धारित प्रारूप और नियम अवश्य जांचें।
+</div>
+</div>
 
-      <div id="transferFields" class="hidden">
+<!-- PREVIEW -->
+<div class="paper-wrap">
+<div id="paper" class="paper">
+<div class="paper-header">
+<h2>आवेदन पत्र</h2>
+<h3 id="previewTitle">Casual Leave Application</h3>
+</div>
 
-        <div class="field">
-          <label>वर्तमान विद्यालय</label>
-          <input id="currentSchool" placeholder="वर्तमान विद्यालय">
-        </div>
+<p>
+सेवा में,<br>
+<span id="pHead">प्रधानाध्यापक / सक्षम पदाधिकारी</span><br>
+<span id="pSchool">विद्यालय का नाम</span>, <span id="pDistrict">जिला</span>
+</p>
 
-        <div class="field">
-          <label>स्थानांतरण का कारण</label>
-          <textarea id="transferReason" placeholder="स्थानांतरण का कारण"></textarea>
-        </div>
+<div class="subject" id="pSubject">
+विषय: आकस्मिक अवकाश हेतु आवेदन।
+</div>
 
-      </div>
+<p>महोदय/महोदया,</p>
 
-      <div id="nocFields" class="hidden">
+<p id="pBody">
+सविनय निवेदन है कि मैं <b>आवेदक का नाम</b>, <b>शिक्षक</b> के पद पर आपके विद्यालय में कार्यरत हूँ। मुझे व्यक्तिगत कारण से अवकाश की आवश्यकता है।
+</p>
 
-        <div class="field">
-          <label>NOC किस उद्देश्य से चाहिए?</label>
-          <textarea id="nocPurpose" placeholder="NOC का उद्देश्य"></textarea>
-        </div>
+<p id="pDates">
+अतः कृपया मुझे आवश्यक अवकाश प्रदान करने की कृपा करें।
+</p>
 
-      </div>
+<p>धन्यवाद।</p>
 
-      <div id="joiningFields" class="hidden">
+<div class="signature">
+भवदीय,<br><br>
+<b id="pName">आवेदक का नाम</b><br>
+<span id="pDesignation">शिक्षक</span><br>
+<span id="pSchool2">विद्यालय का नाम</span><br>
+दिनांक: <span id="pDate">—</span>
+</div>
+</div>
+</div>
 
-        <div class="field">
-          <label>Joining Date</label>
-          <input id="joiningDate" type="date">
-        </div>
-
-        <div class="field">
-          <label>आदेश संख्या</label>
-          <input id="orderNo" placeholder="आदेश संख्या">
-        </div>
-
-      </div>
-
-      <div id="relievingFields" class="hidden">
-
-        <div class="field">
-          <label>Relieving Date</label>
-          <input id="relievingDate" type="date">
-        </div>
-
-        <div class="field">
-          <label>Relieving का कारण</label>
-          <textarea id="relievingReason" placeholder="कारण"></textarea>
-        </div>
-
-      </div>
-
-      <div id="serviceFields" class="hidden">
-
-        <div class="field">
-          <label>Service Book में किस प्रकार का कार्य चाहिए?</label>
-          <textarea id="serviceRequest" placeholder="जैसे: प्रविष्टि सुधार, नाम सुधार आदि"></textarea>
-        </div>
-
-      </div>
-
-      <div class="field">
-        <label>स्थान</label>
-        <input id="place" placeholder="स्थान">
-      </div>
-
-      <div class="action-buttons">
-        <button class="preview-btn" onclick="generatePreview(true)">👁️ Preview</button>
-        <button class="pdf-btn" onclick="downloadPDF()">📥 PDF Download</button>
-        <button class="reset-btn" onclick="resetForm()">↻ Reset</button>
-      </div>
-    </div>
-
-    <div class="preview-box">
-      <div id="paper">
-        आवेदन का Preview यहां दिखाई देगा।
-      </div>
-    </div>
-
-  </div>
+</div>
+</div>
 </section>
+</main>
 
 <footer>
-  © 2026 Sikshak Seva | शिक्षकों की सुविधा के लिए बनाया गया पोर्टल
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-<script>
+<p><strong>📚 Sikshak Seva</strong></p>
+<p>शिक्षकों की महत्वपूर्ण सेवाएं एक जगह</p>
+<p>© 2026 Sikshak Seva • For Educational Assistance</p>
+  </footer>
+  <script>
 let currentForm = "casual";
 
 const titles = {
-  casual:"📝 Casual Leave Application",
-  medical:"🏥 Medical Leave Application",
-  other:"📄 Other Leave Application",
-  special:"⭐ Special Leave Application",
-  transfer:"🔄 Transfer Application",
-  noc:"📜 NOC Application",
-  joining:"🏫 Joining Application",
-  relieving:"📤 Relieving Application",
-  service:"📚 Service Book Application"
+  casual: "Casual Leave Application",
+  medical: "Medical Leave Application",
+  other: "Other Leave Application",
+  special: "Special Leave Application",
+  transfer: "Transfer Application",
+  noc: "NOC Application",
+  joining: "Joining Application",
+  relieving: "Relieving Application",
+  service: "Service Book Application"
 };
 
-function $(id){
-  return document.getElementById(id);
-}
-
-function value(id){
-  return $(id)?.value.trim() || "";
-}
-
-function formatDate(dateValue){
-  if(!dateValue) return "................";
-
-  const parts = dateValue.split("-");
-  if(parts.length !== 3) return dateValue;
-
-  return parts[2] + "/" + parts[1] + "/" + parts[0];
-}
-
-function selectForm(type,button){
-
+function selectForm(type, button) {
   currentForm = type;
 
-  document.querySelectorAll(".form-buttons button")
-    .forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".form-tab").forEach(b => {
+    b.classList.remove("active");
+  });
 
-  if(button) button.classList.add("active");
+  if (button) {
+    button.classList.add("active");
+  }
 
-  $("formHeading").textContent = titles[type];
+  document.getElementById("formTitle").innerText = titles[type];
+  document.getElementById("previewTitle").innerText = titles[type];
 
-  $("leaveFields").classList.toggle(
-    "hidden",
-    !["casual","medical","other","special"].includes(type)
-  );
-
-  $("transferFields").classList.toggle("hidden",type !== "transfer");
-  $("nocFields").classList.toggle("hidden",type !== "noc");
-  $("joiningFields").classList.toggle("hidden",type !== "joining");
-  $("relievingFields").classList.toggle("hidden",type !== "relieving");
-  $("serviceFields").classList.toggle("hidden",type !== "service");
+  document.getElementById("leaveFields").style.display = ["casual", "medical", "other", "special"].includes(type) ? "block" : "none";
+  document.getElementById("transferFields").style.display = type === "transfer" ? "block" : "none";
+  document.getElementById("nocFields").style.display = type === "noc" ? "block" : "none";
+  document.getElementById("joiningFields").style.display = type === "joining" ? "block" : "none";
+  document.getElementById("relievingFields").style.display = type === "relieving" ? "block" : "none";
+  document.getElementById("serviceFields").style.display = type === "service" ? "block" : "none";
 
   generatePreview(false);
 }
 
-function generatePreview(showAlert){
-
-  if(showAlert && (!value("name") || !value("school"))){
-    alert("कृपया नाम और विद्यालय का नाम भरें।");
-    return;
-  }
-
-  const name = value("name") || "................";
-  const designation = value("designation") || "................";
-  const school = value("school") || "................";
-  const district = value("district") || "................";
-  const head = value("head") || "प्रधानाध्यापक / संबंधित अधिकारी";
-  const applicationDate = formatDate(value("applicationDate"));
-  const place = value("place") || "................";
-
-  let body = "";
-
-  if(["casual","medical","other","special"].includes(currentForm)){
-
-    const from = formatDate(value("fromDate"));
-    const to = formatDate(value("toDate"));
-    const days = value("days") || "................";
-    const reason = value("leaveReason") || "................";
-
-    body = `
-      <p>सेवा में,</p>
-      <p>${head}<br>
-      ${school}<br>
-      जिला: ${district}</p>
-
-      <p class="subject">
-      विषय: ${titles[currentForm]} हेतु आवेदन।
-      </p>
-
-      <p>महोदय / महोदया,</p>
-
-      <p>
-      सविनय निवेदन है कि मैं <b>${name}</b>, पद <b>${designation}</b>,
-      विद्यालय <b>${school}</b> में कार्यरत हूँ।
-      मुझे दिनांक <b>${from}</b> से <b>${to}</b> तक कुल
-      <b>${days}</b> दिनों की छुट्टी आवश्यक है।
-      </p>
-
-      <p>
-      छुट्टी लेने का कारण: <b>${reason}</b>
-      </p>
-
-      <p>
-      अतः आपसे विनम्र अनुरोध है कि मुझे उक्त अवधि की छुट्टी
-      प्रदान करने की कृपा करें।
-      </p>
-    `;
-  }
-
-  if(currentForm === "transfer"){
-
-    body = `
-      <p>सेवा में,</p>
-      <p>${head}<br>${school}<br>जिला: ${district}</p>
-
-      <p class="subject">विषय: स्थानांतरण हेतु आवेदन।</p>
-
-      <p>महोदय / महोदया,</p>
-
-      <p>
-      सविनय निवेदन है कि मैं <b>${name}</b>, पद <b>${designation}</b>,
-      वर्तमान विद्यालय <b>${value("currentSchool") || school}</b> में कार्यरत हूँ।
-      </p>
-
-      <p>
-      स्थानांतरण का कारण: <b>${value("transferReason") || "................"}</b>
-      </p>
-
-      <p>
-      अतः मेरा स्थानांतरण करने की कृपा की जाए।
-      </p>
-    `;
-  }
-
-  if(currentForm === "noc"){
-
-    body = `
-      <p>सेवा में,</p>
-      <p>${head}<br>${school}<br>जिला: ${district}</p>
-
-      <p class="subject">विषय: अनापत्ति प्रमाण-पत्र (NOC) हेतु आवेदन।</p>
-
-      <p>महोदय / महोदया,</p>
-
-      <p>
-      सविनय निवेदन है कि मैं <b>${name}</b>, पद <b>${designation}</b>,
-      आपके अधीन कार्यरत हूँ।
-      </p>
-
-      <p>
-      मुझे निम्न उद्देश्य के लिए NOC की आवश्यकता है:
-      <b>${value("nocPurpose") || "................"}</b>
-      </p>
-
-      <p>
-      अतः कृपया मुझे अनापत्ति प्रमाण-पत्र प्रदान करने की कृपा करें।
-      </p>
-    `;
-  }
-
-  if(currentForm === "joining"){
-
-    body = `
-      <p>सेवा में,</p>
-      <p>${head}<br>${school}<br>जिला: ${district}</p>
-
-      <p class="subject">विषय: योगदान / Joining देने के संबंध में।</p>
-
-      <p>महोदय / महोदया,</p>
-
-      <p>
-      सविनय निवेदन है कि मैं <b>${name}</b>, पद <b>${designation}</b>,
-      आदेश संख्या <b>${value("orderNo") || "................"}</b>
-      के अनुसार दिनांक <b>${formatDate(value("joiningDate"))}</b>
-      को अपने पद पर योगदान दे रहा / रही हूँ।
-      </p>
-
-      <p>
-      अतः मेरा योगदान स्वीकार करने की कृपा करें।
-      </p>
-    `;
-  }
-
-  if(currentForm === "relieving"){
-
-    body = `
-      <p>सेवा में,</p>
-      <p>${head}<br>${school}<br>जिला: ${district}</p>
-
-      <p class="subject">विषय: कार्यमुक्त / Relieving करने के संबंध में।</p>
-
-      <p>महोदय / महोदया,</p>
-
-      <p>
-      सविनय निवेदन है कि मैं <b>${name}</b>, पद <b>${designation}</b>,
-      को दिनांक <b>${formatDate(value("relievingDate"))}</b> को
-      कार्यमुक्त करने की कृपा की जाए।
-      </p>
-
-      <p>
-      कारण: <b>${value("relievingReason") || "................"}</b>
-      </p>
-    `;
-  }
-
-  if(currentForm === "service"){
-
-    body = `
-      <p>सेवा में,</p>
-      <p>${head}<br>${school}<br>जिला: ${district}</p>
-
-      <p class="subject">विषय: Service Book संबंधी आवेदन।</p>
-
-      <p>महोदय / महोदया,</p>
-
-      <p>
-      सविनय निवेदन है कि मैं <b>${name}</b>, पद <b>${designation}</b>,
-      आपके विद्यालय में कार्यरत हूँ।
-      </p>
-
-      <p>
-      Service Book में निम्न कार्य कराने का अनुरोध है:
-      <b>${value("serviceRequest") || "................"}</b>
-      </p>
-
-      <p>
-      अतः आवश्यक कार्रवाई करने की कृपा करें।
-      </p>
-    `;
-  }
-
-  $("paper").innerHTML = `
-    <h2>${titles[currentForm]}</h2>
-
-    <div class="date">
-      दिनांक: ${applicationDate}
-    </div>
-
-    ${body}
-
-    <p>धन्यवाद।</p>
-
-    <div class="signature">
-      भवदीय,<br><br>
-      <b>${name}</b><br>
-      पद: ${designation}<br>
-      विद्यालय: ${school}<br>
-      स्थान: ${place}
-    </div>
-  `;
+function val(id) {
+  let el = document.getElementById(id);
+  return el ? el.value.trim() : "";
 }
 
-function downloadPDF(){
+function formatDate(date) {
+  if (!date) return "—";
+  let d = new Date(date);
+  if (isNaN(d)) return date;
+  return d.toLocaleDateString("hi-IN", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+}
 
-  if(!value("name") || !value("school")){
-    alert("पहले नाम और विद्यालय का नाम भरें।");
-    return;
+function generatePreview(validate = true) {
+  let name = val("name");
+  let designation = val("designation");
+  let school = val("school");
+  let district = val("district");
+  let head = val("head") || "प्रधानाध्यापक / सक्षम पदाधिकारी";
+  let applicationDate = val("applicationDate");
+
+  if (validate) {
+    if (!name || !designation || !school || !district || !applicationDate) {
+      alert("कृपया * वाले सभी आवश्यक fields भरें।");
+      return;
+    }
   }
 
+  document.getElementById("pHead").innerText = head;
+  document.getElementById("pSchool").innerText = school || "विद्यालय का नाम";
+  document.getElementById("pDistrict").innerText = district || "जिला";
+  document.getElementById("pName").innerText = name || "आवेदक का नाम";
+  document.getElementById("pDesignation").innerText = designation || "शिक्षक";
+  document.getElementById("pSchool2").innerText = school || "विद्यालय का नाम";
+  document.getElementById("pDate").innerText = formatDate(applicationDate);
+
+  let subjectEl = document.getElementById("pSubject");
+  let bodyEl = document.getElementById("pBody");
+  let datesEl = document.getElementById("pDates");
+
+  if (currentForm === "casual") {
+    subjectEl.innerText = "विषय: आकस्मिक अवकाश हेतु आवेदन।";
+    bodyEl.innerHTML = `सविनय निवेदन है कि मैं <b>${name || "आवेदक का नाम"}</b>, <b>${designation || "शिक्षक"}</b> के पद पर आपके विद्यालय <b>${school || "विद्यालय का नाम"}</b> में कार्यरत हूँ। मुझे व्यक्तिगत आवश्यक कार्य के कारण अवकाश की आवश्यकता है।`;
+    datesEl.innerHTML = `अतः कृपया मुझे दिनांक <b>${formatDate(val("fromDate"))}</b> से <b>${formatDate(val("toDate"))}</b> तक ${val("days") ? "<b>" + val("days") + " दिन</b>" : ""} का आकस्मिक अवकाश प्रदान करने की कृपा करें।<br>${val("leaveReason") ? "कारण: " + val("leaveReason") : ""}`;
+  } 
+  else if (currentForm === "medical") {
+    subjectEl.innerText = "विषय: चिकित्सा अवकाश हेतु आवेदन।";
+    bodyEl.innerHTML = `सविनय निवेदन है कि मैं <b>${name || "आवेदक का नाम"}</b>, <b>${designation || "शिक्षक"}</b> के पद पर कार्यरत हूँ। अस्वस्थता के कारण मैं विद्यालय में उपस्थित होने में असमर्थ हूँ।`;
+    datesEl.innerHTML = `अतः कृपया मुझे दिनांक <b>${formatDate(val("fromDate"))}</b> से <b>${formatDate(val("toDate"))}</b> तक चिकित्सा अवकाश प्रदान करने की कृपा करें।<br>${val("leaveReason") ? "विवरण: " + val("leaveReason") : ""}`;
+  } 
+  else if (currentForm === "other") {
+    subjectEl.innerText = "विषय: आवश्यक अवकाश हेतु आवेदन।";
+    bodyEl.innerHTML = `सविनय निवेदन है कि मैं <b>${name || "आवेदक का नाम"}</b>, <b>${designation || "शिक्षक"}</b> के पद पर आपके विद्यालय में कार्यरत हूँ।`;
+    datesEl.innerHTML = `अतः कृपया मुझे दिनांक <b>${formatDate(val("fromDate"))}</b> से <b>${formatDate(val("toDate"))}</b> तक अवकाश प्रदान करने की कृपा करें।<br>${val("leaveReason") ? "कारण: " + val("leaveReason") : ""}`;
+  }
+  else if (currentForm === "special") {
+    subjectEl.innerText = "विषय: विशेष अवकाश हेतु आवेदन।";
+    bodyEl.innerHTML = `सविनय निवेदन है कि मैं <b>${name || "आवेदक का नाम"}</b>, <b>${designation || "शिक्षक"}</b> के पद पर आपके विद्यालय में कार्यरत हूँ।`;
+    datesEl.innerHTML = `अतः कृपया मुझे विशेष परिस्थितियों के कारण दिनांक <b>${formatDate(val("fromDate"))}</b> से <b>${formatDate(val("toDate"))}</b> तक विशेष अवकाश देने की कृपा करें।<br>${val("leaveReason") ? "कारण: " + val("leaveReason") : ""}`;
+  }
+  else if (currentForm === "transfer") {
+    subjectEl.innerText = "विषय: स्थानांतरण हेतु आवेदन।";
+    bodyEl.innerHTML = `सविनय निवेदन है कि मैं <b>${name || "आवेदक का नाम"}</b>, <b>${designation || "शिक्षक"}</b> के पद पर वर्तमान विद्यालय <b>${val("currentSchool") || school}</b> में कार्यरत हूँ।`;
+    datesEl.innerHTML = `अतः मेरे स्थानांतरण से संबंधित अनुरोध पर विचार करते हुए उचित कार्रवाई करने की कृपा करें।<br>${val("transferReason") ? "कारण: " + val("transferReason") : ""}`;
+  }
+  else if (currentForm === "noc") {
+    subjectEl.innerText = "विषय: अनापत्ति प्रमाण पत्र (NOC) प्राप्त करने हेतु आवेदन।";
+    bodyEl.innerHTML = `सविनय निवेदन है कि मैं <b>${name || "आवेदक का नाम"}</b>, <b>${designation || "शिक्षक"}</b> के पद पर आपके विद्यालय में कार्यरत हूँ।`;
+    datesEl.innerHTML = `मुझे ${val("nocPurpose") ? "<b>" + val("nocPurpose") + "</b> हेतु" : ""} अनापत्ति प्रमाण पत्र (NOC) की आवश्यकता है। अतः मुझे NOC प्रदान करने की कृपा करें।`;
+  }
+  else if (currentForm === "joining") {
+    subjectEl.innerText = "विषय: योगदान (Joining) देने के संबंध में।";
+    bodyEl.innerHTML = `महाशय, आदेश संख्या <b>${val("orderNo") || "—"}</b> के अनुपालन में मैं <b>${name || "आवेदक का नाम"}</b>, <b>${designation || "शिक्षक"}</b> दिनांक <b>${formatDate(val("joiningDate"))}</b> को पूर्वाह्न/अपराह्व में इस विद्यालय में अपना योगदान समर्पित कर रहा/रही हूँ।`;
+    datesEl.innerHTML = `अतः मेरा योगदान स्वीकार करने की कृपा की जाए।`;
+  }
+  else if (currentForm === "relieving") {
+    subjectEl.innerText = "विषय: कार्यमुक्त (Relieving) होने के संबंध में।";
+    bodyEl.innerHTML = `महाशय, स्थानांतरण/अन्य कारणवश मैं <b>${name || "आवेदक का नाम"}</b>, <b>${designation || "शिक्षक"}</b> दिनांक <b>${formatDate(val("relievingDate"))}</b> को कार्यमुक्त होने हेतु अनुरोध करता/करती हूँ।`;
+    datesEl.innerHTML = `${val("relievingReason") ? "कारण: " + val("relievingReason") : ""} अतः मुझे कार्यमुक्त करने की कृपा की जाए।`;
+  }
+  else if (currentForm === "service") {
+    subjectEl.innerText = "विषय: सर्विस बुक (Service Book) से संबंधित आवेदन।";
+    bodyEl.innerHTML = `सविनय निवेदन है कि मैं <b>${name || "आवेदक का नाम"}</b>, <b>${designation || "शिक्षक"}</b> के पद पर कार्यरत हूँ।`;
+    datesEl.innerHTML = `मेरा सर्विस बुक से संबंधित अनुरोध निम्नलिखित है:<br><b>${val("serviceRequest") || "—"}</b><br>अतः इस पर आवश्यक कार्रवाई की जाए।`;
+  }
+}
+
+// अपडेटेड और अचूक पीडीएफ डाउनलोड फंक्शन
+function downloadPDF() {
+  generatePreview(true);
+  let element = document.getElementById("paper");
+  
+  let opt = {
+    margin:       10,
+    filename:     `${currentForm}_application.pdf`,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2, useCORS: true, logging: true, letterRendering: true },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save().catch(err => {
+    console.error("PDF Error: ", err);
+    alert("PDF डाउनलोड करने में समस्या आई। कृपया पुनः प्रयास करें।");
+  });
+}
+
+function resetForm() {
+  document.querySelectorAll("input, textarea").forEach(el => {
+    if(el.type !== 'date' || el.id !== 'applicationDate') {
+      el.value = "";
+    }
+  });
+  document.getElementById("applicationDate").valueAsDate = new Date();
   generatePreview(false);
+}
 
-  const element = $("paper");
-  const fileName = "Sikshak_Seva_" +
-    (value("name").replace(/\s+/g,"_") || "Application") +
-    ".pdf";
+function searchServices() {
+  let query = document.getElementById("searchInput").value.toLowerCase().trim();
+  let cards = document.querySelectorAll(".service-card");
+  let hasResult = false;
 
-  const options = {
-    margin:10,
-    filename: fileName,
+  cards.forEach(card => {
+    let text = card.innerText.toLowerCase();
+    let dataAttr = card.getAttribute("data-title") || "";
+    if (text.includes(query) || dataAttr.includes(query)) {
+      card.style.display = "block";
+      hasResult = true;
+    } else {
+      card.style.display = "none";
+    }
+  });
 
-image: {
-  type: "jpeg",
-  quality: 0.98
-},
+  document.getElementById("noResult").style.display = hasResult ? "none" : "block";
+}
 
-html2canvas: {
-  scale: 2,
-  useCORS: true,
-  backgroundColor: "#ffffff"
-},
-
-jsPDF: {
-  unit: "mm",
-  format: "a4",
-  orientation: "portrait"
+window.onload = function() {
+  let today = new Date().toISOString().split('T')[0];
+  let appDate = document.getElementById("applicationDate");
+  if(appDate && !appDate.value) {
+    appDate.value = today;
   }
-    };
+  selectForm('casual', document.querySelector('.form-tab'));
+};
+</script>
 
-try {
-  html2pdf()
-    .set(options)
-    .from(element)
-    .save();
-} catch (error) {
-  console.error(error);
-  alert("PDF बनाने में समस्या हुई।");
-}
-
-}
+</body>
+</html>
