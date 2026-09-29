@@ -14,7 +14,23 @@
   margin:0;
   padding:0;
 }
-
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #paper, #paper * {
+    visibility: visible;
+  }
+  #paper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    padding: 0;
+  }
+}
+  
 body{
   font-family:Arial,"Noto Sans Devanagari",sans-serif;
   background:#f5f8fc;
@@ -901,19 +917,7 @@ function downloadPDF() {
   generatePreview(true);
   
   setTimeout(() => {
-    let printContent = document.getElementById("paper").innerHTML;
-    let originalContent = document.body.innerHTML;
-
-    document.body.innerHTML = `
-      <div style="padding: 20px; font-family: 'Times New Roman', serif; background: white;">
-        ${printContent}
-      </div>
-    `;
-
     window.print();
-    
-    document.body.innerHTML = originalContent;
-    window.location.reload();
   }, 300);
 }
 function resetForm() {
