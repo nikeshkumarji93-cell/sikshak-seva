@@ -899,22 +899,23 @@ function generatePreview(validate = true) {
 // अपडेटेड और अचूक पीडीएफ डाउनलोड फंक्शन
 function downloadPDF() {
   generatePreview(true);
-  let element = document.getElementById("paper");
   
-  let opt = {
-    margin:       10,
-    filename:     `${currentForm}_application.pdf`,
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2, useCORS: true, logging: true, letterRendering: true },
-    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  };
+  setTimeout(() => {
+    let printContent = document.getElementById("paper").innerHTML;
+    let originalContent = document.body.innerHTML;
 
-  html2pdf().set(opt).from(element).save().catch(err => {
-    console.error("PDF Error: ", err);
-    alert("PDF डाउनलोड करने में समस्या आई। कृपया पुनः प्रयास करें।");
-  });
+    document.body.innerHTML = `
+      <div style="padding: 20px; font-family: 'Times New Roman', serif; background: white;">
+        ${printContent}
+      </div>
+    `;
+
+    window.print();
+    
+    document.body.innerHTML = originalContent;
+    window.location.reload();
+  }, 300);
 }
-
 function resetForm() {
   document.querySelectorAll("input, textarea").forEach(el => {
     if(el.type !== 'date' || el.id !== 'applicationDate') {
