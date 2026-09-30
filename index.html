@@ -955,9 +955,31 @@ window.onload = function() {
   if(appDate && !appDate.value) {
     appDate.value = today;
   }
-  selectForm('casual', document.querySelector('.form-tab'));
-};
+      selectForm('casual', document.querySelector('.form-tab'));
+  };
+
+  // Google Transliteration (Hinglish to Hindi) Script
+  function onLoad() {
+    var options = {
+      sourceLanguage: 'en',
+      destinationLanguage: ['hi'],
+      shortcutKey: 'ctrl+g',
+      transliterationEnabled: true
+    };
+    var control = new google.elements.transliteration.TransliterationControl(options);
+    var ids = [];
+    document.querySelectorAll("input[type='text'], textarea").forEach(el => {
+      if(el.id) ids.push(el.id);
+    });
+    control.makeTransliteratable(ids);
+  }
+  
+  if (typeof google !== 'undefined' && google.load) {
+    google.load("elements", "1", { packages: "transliteration" });
+    google.setOnLoadCallback(onLoad);
+  }
 </script>
 
-</body>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  </body>
 </html>
